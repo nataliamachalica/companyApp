@@ -3,7 +3,6 @@ const router = express.Router();
 const Employee = require('../models/employee.model');
 
 router.get('/employees', async (req, res) => {
-
   try {
     res.json(await Employee.find());
   }
@@ -13,7 +12,6 @@ router.get('/employees', async (req, res) => {
 });
 
 router.get('/employees/random', async (req, res) => {
-
   try {
     const count = await Employee.countDocuments();
     const rand = Math.floor(Math.random() * count);
@@ -27,7 +25,6 @@ router.get('/employees/random', async (req, res) => {
 });
 
 router.get('/employees/:id', async (req, res) => {
-
   try {
     const emp = await Employee.findBy(req.params.id);
     if(!emp) res.status(404).json({ message: 'Not found' });
@@ -39,7 +36,6 @@ router.get('/employees/:id', async (req, res) => {
 });
 
 router.post('/employees', async (req, res) => {
-
   try {
     const { firstName, lastName, department } = req.body;
     const newEmployee = new Employee({ firstName: firstName, lastName: lastName, department: department })
@@ -53,7 +49,6 @@ router.post('/employees', async (req, res) => {
 
 router.put('/employees/:id', async (req, res) => {
   const { firstName, lastName, department } = req.body;
-
   try {
     const emp = await Employee.findById(req.params.id);
     if(emp) {
@@ -71,7 +66,6 @@ router.put('/employees/:id', async (req, res) => {
 });
 
 router.delete('/employees/:id', async (req, res) => {
-
   try {
     const emp = await Employee.findById(req.params.id);
     if(emp) {

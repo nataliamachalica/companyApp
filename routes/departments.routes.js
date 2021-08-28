@@ -3,7 +3,6 @@ const router = express.Router();
 const Department = require('../models/department.model');
 
 router.get('/departments', async (req, res) => {
-
   try {
     res.json(await Department.find());
   }
@@ -13,7 +12,6 @@ router.get('/departments', async (req, res) => {
 });
 
 router.get('/departments/random', async (req, res) => {
-
   try {
     const count = await Department.countDocuments();
     const rand = Math.floor(Math.random() * count);
@@ -27,7 +25,6 @@ router.get('/departments/random', async (req, res) => {
 });
 
 router.get('/departments/:id', async (req, res) => {
-
   try {
     const dep = await Department.findById(req.params.id);
     if(!dep) res.status(404).json({ message: 'Not found' });
@@ -39,7 +36,6 @@ router.get('/departments/:id', async (req, res) => {
 });
 
 router.post('/departments', async (req, res) => {
-
   try {
     const { name } = req.body;
     const newDepartment = new Department({ name: name });
@@ -53,7 +49,6 @@ router.post('/departments', async (req, res) => {
 
 router.put('/departments/:id', async (req, res) => {
   const { name } = req.body;
-
   try {
     const dep = await Department.findById(req.params.id);
     if(dep) {
@@ -69,7 +64,6 @@ router.put('/departments/:id', async (req, res) => {
 });
 
 router.delete('/departments/:id', async (req, res) => {
-
   try {
     const dep = await Department.findById(req.params.id);
     if(dep) {
