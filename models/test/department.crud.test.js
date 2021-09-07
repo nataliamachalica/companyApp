@@ -25,8 +25,8 @@ describe('Department', () => {
 
 		it('should return all the data with find method', async() => {
 			const departments = await Department.find();
-			const expectedLngth = 2;
-			expect(departments.length).to.be.equal(expectedLngth);
+			const expectedLength = 2;
+			expect(departments.length).to.be.equal(expectedLength);
 		});
 
 		it('should return a proper document by name by findOne', async () => {
@@ -64,10 +64,6 @@ describe('Department', () => {
       await testDepTwo.save();
     });
 
-    afterEach(async () => {
-      await Department.deleteMany();
-    });
-
     it('should properly update one document with updateOne method', async () => {
       await Department.updateOne({ name: 'Department #1' }, { $set: { name: '=Department #1=' }});
       const updatedDepartment = await Department.findOne({ name: '=Department #1=' });
@@ -89,7 +85,7 @@ describe('Department', () => {
       expect(updatedDepartments.length).to.be.equal(2);
     });
 
-    after(async () => {
+    afterEach(async () => {
       await Department.deleteMany();
     });
 
@@ -103,10 +99,6 @@ describe('Department', () => {
 
 			const testDepTwo = new Department({ name: 'Department #2' });
 			await testDepTwo.save();
-		});
-
-		afterEach(async () => {
-			await Department.deleteMany();
 		});
 
 		it('should properly remove one document with "deleteOne" method', async () => {
@@ -128,7 +120,7 @@ describe('Department', () => {
       expect(removedDepartment.length).to.be.equal(0);
 		});
 
-		after(async () => {
+		afterEach(async () => {
 			await Department.deleteMany();
 		});
 	});
